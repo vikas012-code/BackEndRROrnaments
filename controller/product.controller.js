@@ -66,7 +66,7 @@ export async function UploadImage(req,res) {
         console.log(result)
         
       })
-      res.status(400).json(uploadResult.url);
+      res.status(200).json(uploadResult.url);
     }
    catch (error) {
       console.error(error);
