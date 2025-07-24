@@ -1,5 +1,5 @@
 import express from "express";
-import {AllProductList,UploadImage,UploadProduct, DeleteProductById ,UpdateQuantityInStock , UpdateQuantityOutOfStock} from "../controller/product.controller.js"
+import {AllProductList,UploadImage,UploadProduct, DeleteProductById ,ChangeQuantityInStock , UpdateQuantityOutOfStock} from "../controller/product.controller.js"
 
 const route = express.Router()
 
@@ -11,8 +11,5 @@ route.post("/uploadproduct",UploadProduct)
 
 route.delete("/deleteproductbyid",DeleteProductById)
 
-route.patch("/updatequantitytoinstock",UpdateQuantityInStock)
-
-route.patch("/updatequantitytooutofstock",UpdateQuantityOutOfStock)
-
+route.patch("/changequantityinstock",ChangeQuantityInStock)
 export default route;

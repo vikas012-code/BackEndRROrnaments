@@ -21,12 +21,12 @@ export async function DeleteProductById(req ,res) {
 }
 
 
-export async function UpdateQuantityInStock(req ,res) {
-  const {_id,}= req.body;
+export async function ChangeQuantityInStock(req ,res) {
+  const {_id,quantity}= req.body;
   try {
     const result = await Products.findByIdAndUpdate(
       _id,
-      { $set: { quantity: true} },
+      { $set: { quantity: !quantity} },
       { new: true }
     );
    
@@ -35,24 +35,6 @@ export async function UpdateQuantityInStock(req ,res) {
     console.error('Error ', err);
   }
 }
-
-export async function UpdateQuantityOutOfStock(req ,res) {
-  const {_id,}= req.body;
-  try {
-    const result = await Products.findByIdAndUpdate(
-      _id,
-      { $set: { quantity: false} },
-      { new: true }
-    );
-   
-    res.json(result)
-  } catch (err) {
-    console.error('Error ', err);
-  }
-}
-
-
-
 
 
 export async function UploadImage(req,res) {
