@@ -1,5 +1,7 @@
 import Products from "../models/products.model.js"
 import { v2 as cloudinary } from 'cloudinary';
+import fs from "fs/promises"
+import path from "path";
 
 export async function AllProductList(req,res) {
     const data = await Products.find({})
@@ -36,7 +38,8 @@ export async function ChangeQuantityInStock(req ,res) {
   }
 }
 
-
+const __dirname = import.meta.dirname;
+// console.log(path.join(__dirname,"../","temp"))
 export async function UploadImage(req,res) {
 
     //Configuration
@@ -57,10 +60,27 @@ export async function UploadImage(req,res) {
         
       })
       res.status(200).json(uploadResult.url);
+
+      fs.rm(path.join(__dirname,"../","tmp"),{recursive:true},(err)=>{
+        if(err){
+          console.log(err)
+        }
+        else{
+          console.log("temperory file removed")
+        }
+      })
     }
    catch (error) {
       console.error(error);
       res.status(400).json(error,req);
+      fs.rm(path.join(__dirname,"../","tmp"),{recursive:true},(err)=>{
+        if(err){
+          console.log(err)
+        }
+        else{
+          console.log("temperory file removed")
+        }
+      })
     }
   
 };
